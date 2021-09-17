@@ -8,6 +8,6 @@ This repo is created to experiment with power of CNN on NLP tasks.
   * [ ] Classifier Head
 * [ ] Training
 * [ ] Saving & Loading
-  * [ Saving ]
-  * [ Loading ]
+  * [ ] Saving
+  * [ ] Loading
 * [ ] Inference
