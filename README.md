@@ -3,6 +3,8 @@ This repo is created to experiment with power of CNN on NLP tasks.
 
 ### TODO
 * [ ] Data Preparation
+  * [x] Text Preprocessing
+  * [ ] Data pipeline
 * [ ] Model Design
   * [ ] Encoder Head
   * [ ] Classifier Head
