@@ -1,8 +1,14 @@
 import spacy
 import pandas as pd
 from text_preprocessing.tweet_cleaning import tweet_preprocessing
+import subprocess
 
-en = spacy.load('en_core_web_sm')
+
+try:
+    en = spacy.load('en_core_web_sm')
+except:
+    _ = subprocess.run(['python', '-m', 'spacy', 'download', 'en_core_web_sm'])
+    en = spacy.load('en_core_web_sm')
 
 def tokenize(sentence):
     return [tok.text for tok in en.tokenizer(sentence)]
