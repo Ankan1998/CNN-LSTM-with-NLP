@@ -3,14 +3,12 @@ from torchtext.legacy.data import Field
 from text_preprocessing import tweet_cleaning
 from text_preprocessing import tokenizer_en
 
-def field_maker(max_doc_len):
+def field_maker():
     Text = Field(
         preprocessing=tweet_cleaning.tweet_preprocessing,
         sequential=True,
         tokenize=tokenizer_en.tokenize,
         batch_first=True,
-        include_lengths=True,
-        fix_length=max_doc_len,
         lower=True
     )
     Label = Field(
