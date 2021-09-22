@@ -3,7 +3,7 @@ from torchtext.legacy.data import Field
 from text_preprocessing import tweet_cleaning
 from text_preprocessing import tokenizer_en
 
-def field_maker():
+def field_maker(type='train'):
     Text = Field(
         preprocessing=tweet_cleaning.tweet_preprocessing,
         sequential=True,
@@ -17,10 +17,8 @@ def field_maker():
         pad_token=None,
         unk_token=None
     )
-
-    fields = [('text', Text), ('labels', Label)]
+    if type == 'train':
+        fields = {'tweet':('text', Text), 'label': ('labels', Label)}
+    else:
+        fields ={'tweet':('text', Text)}
     return fields
-
-if __name__=="__main__":
-    csv_file = r'C:\Users\Ankan\Downloads\train_tweet.csv'
-    df = pd.read_csv(csv_file)
