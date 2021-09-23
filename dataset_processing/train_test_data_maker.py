@@ -1,4 +1,5 @@
 import pandas as pd
+import random
 from torchtext.legacy.data import TabularDataset
 from dataset_processing.custom_field import field_maker
 
@@ -19,6 +20,13 @@ def train_test_maker(train_file_name,test_file_name):
     )
 
     return train_data,test_data
+
+def train_val_splitter(trn_data):
+    train_data, val_data = trn_data.split(
+        split_raio=0.8,
+        random_state=random.seed(100)
+    )
+    return train_data, val_data
 
 if __name__=="__main__":
 
