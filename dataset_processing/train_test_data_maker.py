@@ -23,7 +23,7 @@ def train_test_maker(train_file_name,test_file_name):
 
 def train_val_splitter(trn_data):
     train_data, val_data = trn_data.split(
-        split_raio=0.8,
+        split_ratio=0.8,
         random_state=random.seed(100)
     )
     return train_data, val_data

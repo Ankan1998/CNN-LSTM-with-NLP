@@ -1,10 +1,20 @@
 import preprocessor as pr
 import pandas as pd
+import re
+
+def cleanup_text(text):
+    text = re.sub('[^a-zA-Z0-9]', ' ', text)
+    text = re.sub(r' +', ' ', text)
+    cleaned_text = re.sub(r'\n', ' ', text)
+
+    return cleaned_text
 
 def tweet_preprocessing(tweet_series):
     cleaned_list = []
     for v in tweet_series:
-        cleaned_list.append(pr.clean(v))
+        init_clean = pr.clean(v)
+        reg_clean = cleanup_text(init_clean)
+        cleaned_list.append(reg_clean)
     return pd.Series(cleaned_list)
 
 if __name__=="__main__":
