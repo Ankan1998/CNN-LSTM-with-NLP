@@ -14,7 +14,7 @@ def data_pipeline(train_file, test_file,batch_size=128):
     train_data, val_data = train_val_splitter(train_data)
 
     # Iterator
-    train_itr, val_itr, test_itr = dataset_itr(train_data, val_data, test_data,1)
+    train_itr, val_itr, test_itr = dataset_itr(train_data, val_data, test_data,batch_size)
 
     return train_itr, val_itr, test_itr
 
@@ -22,10 +22,10 @@ if __name__=="__main__":
 
     train_file = r'C:\Users\Ankan\Downloads\sub_train.csv'
     test_file = r'C:\Users\Ankan\Downloads\sub_test.csv'
-    train_itr, val_itr, test_itr = data_pipeline(train_file,test_file)
+    train_itr, val_itr, test_itr = data_pipeline(train_file,test_file,2)
     for batch in train_itr:
         print(batch.text)
-        print(batch.labels)
+        # print(batch.labels)
         # print(batch.fields['labels'])
         break
 

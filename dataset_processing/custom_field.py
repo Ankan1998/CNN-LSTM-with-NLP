@@ -15,7 +15,8 @@ def field_maker(type='train'):
         sequential=False,
         use_vocab=False,
         pad_token=None,
-        unk_token=None
+        unk_token=None,
+        batch_first=True
     )
     if type == 'train':
         fields = {'tweet':('text', Text), 'label': ('labels', Label)}
