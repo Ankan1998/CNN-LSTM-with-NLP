@@ -1,0 +1,17 @@
+{
+  "training":
+    {
+      "batch_size": "1",
+      "n_epoch": "10",
+      "clip": "0.1"
+    },
+"model":
+    {
+      "input_dim": "100",
+      "emb_dim": "256",
+      "hid_dim": "512",
+      "model_layer": "10",
+      "model_kernel_size": "3",
+      "model_dropout": "0.25"
+    }
+}
