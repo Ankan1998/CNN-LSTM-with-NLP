@@ -2,7 +2,7 @@ from dataset_processing.train_test_data_maker import train_test_maker, train_val
 from dataset_processing.vocab_builder import vocab_builder
 from dataset_processing.data_iterator import dataset_itr
 
-def data_pipeline(train_file, test_file,max_vocab=1000,min_freq=2,batch_size=128):
+def data_pipeline(train_file, test_file,max_vocab=1000,min_freq=2,batch_size=128,device='cpu'):
 
     # Cleaned Data
     trn_data, test_data = train_test_maker(train_file,test_file)
@@ -14,7 +14,7 @@ def data_pipeline(train_file, test_file,max_vocab=1000,min_freq=2,batch_size=128
     train_data, val_data = train_val_splitter(train_data)
 
     # Iterator
-    train_itr, val_itr, test_itr = dataset_itr(train_data, val_data, test_data,batch_size)
+    train_itr, val_itr, test_itr = dataset_itr(train_data, val_data, test_data,batch_size,device)
 
     return train_itr, val_itr, test_itr, vocab_size
 

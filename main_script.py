@@ -42,7 +42,8 @@ def main(
         test_file,
         config['training']['max_vocab'],
         config['training']['min_freq'],
-        config['training']['batch_size']
+        config['training']['batch_size'],
+        device
     )
 
     model = CNNNLPModel(
