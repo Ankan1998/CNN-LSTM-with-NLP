@@ -18,7 +18,8 @@ def main(
         checkpoint_path,
         best_model_path
     ):
-    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    device = 'cuda'
+        # if torch.cuda.is_available() else 'cpu'
 
     with open(config_file, 'r') as j:
         config = json.loads(j.read())
@@ -61,7 +62,7 @@ def main(
     clip = config['training']['clip']
     is_best = False
     best_valid_loss = float('inf')
-
+    model = model.to(device)
     for epoch in tqdm(range(num_epochs)):
 
         train_loss = train(model, train_itr, optimizer, criterion, clip)
@@ -82,8 +83,8 @@ def main(
         save_checkpoint(checkpoint, is_best, checkpoint_path, best_model_path)
 
 if __name__=="__main__":
-    train_file = r'C:\Users\Ankan\Downloads\train_tweet.csv'
-    test_file = r'C:\Users\Ankan\Downloads\test_tweets.csv'
+    train_file = r'C:\Users\Ankan\Downloads\sub_train.csv'
+    test_file = r'C:\Users\Ankan\Downloads\sub_test.csv'
     config_file = r'C:\Users\Ankan\Desktop\Github\CNN-with-NLP\config.json'
     ckpt_path = r'C:\Users\Ankan\Desktop\Github\CNN-with-NLP\ckpt_best_path\latest.pt'
     best_model_path = r'C:\Users\Ankan\Desktop\Github\CNN-with-NLP\ckpt_best_path\best.pt'
