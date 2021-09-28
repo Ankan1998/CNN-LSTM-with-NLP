@@ -1,13 +1,14 @@
 {
   "training":
     {
-      "batch_size": "1",
+      "max_vocab": "10000",
+      "min_freq": "2",
+      "batch_size": "128",
       "n_epoch": "10",
       "clip": "0.1"
     },
 "model":
     {
-      "input_dim": "100",
       "emb_dim": "256",
       "hid_dim": "512",
       "model_layer": "10",
