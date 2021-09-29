@@ -5,7 +5,7 @@ from text_preprocessing import tokenizer_en
 
 def field_maker(type='train'):
     Text = Field(
-        preprocessing=tweet_cleaning.tweet_preprocessing,
+        preprocessing=tweet_cleaning.tweet_preprocessing_series,
         sequential=True,
         tokenize=tokenizer_en.tokenize,
         batch_first=True,

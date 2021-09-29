@@ -1,4 +1,4 @@
-from text_preprocessing.tweet_cleaning import tweet_preprocessing
+from text_preprocessing.tweet_cleaning import tweet_preprocessing_series
 import pandas as pd
 
 def max_doc_len(sentence_series):
@@ -7,5 +7,5 @@ def max_doc_len(sentence_series):
 if __name__=="__main__":
     csv_file = r'C:\Users\Ankan\Downloads\train_tweet.csv'
     df = pd.read_csv(csv_file)
-    df['cleaned'] = tweet_preprocessing(df['tweet'])
+    df['cleaned'] = tweet_preprocessing_series(df['tweet'])
     print(max_doc_len(df['cleaned']))
