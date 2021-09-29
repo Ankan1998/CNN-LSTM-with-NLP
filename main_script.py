@@ -18,8 +18,7 @@ def main(
         checkpoint_path,
         best_model_path
     ):
-    device = 'cuda'
-        # if torch.cuda.is_available() else 'cpu'
+    device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
     with open(config_file, 'r') as j:
         config = json.loads(j.read())
@@ -38,7 +37,7 @@ def main(
         else:
             config['training'][k] = int(v)
 
-    train_itr, val_itr, test_itr, vocab_size = data_pipeline(
+    train_itr, val_itr, test_itr = data_pipeline(
         train_file,
         test_file,
         config['training']['max_vocab'],
@@ -48,7 +47,7 @@ def main(
     )
 
     model = CNNNLPModel(
-        vocab_size,
+        config['training']['max_vocab']+2,
         config['model']['emb_dim'],
         config['model']['hid_dim'],
         config['model']['model_layer'],
@@ -83,9 +82,9 @@ def main(
         save_checkpoint(checkpoint, is_best, checkpoint_path, best_model_path)
 
 if __name__=="__main__":
-    train_file = '/root/CNN-with-NLP/dataset/train_tweet.csv'
-    test_file = '/root/CNN-with-NLP/dataset/test_tweets.csv'
-    config_file = '/root/CNN-with-NLP/config.json'
-    ckpt_path = '/root/CNN-with-NLP/save_model/latest.pt'
-    best_model_path = '/root/CNN-with-NLP/save_model/best.pt'
+    train_file = r'C:\Users\Ankan\Downloads\train_tweet.csv'
+    test_file = r'C:\Users\Ankan\Downloads\test_tweets.csv'
+    config_file = r'C:\Users\Ankan\Desktop\Github\CNN-with-NLP\config.json'
+    ckpt_path = r'C:\Users\Ankan\Desktop\Github\CNN-with-NLP\ckpt_best_path\latest.pt'
+    best_model_path = r'C:\Users\Ankan\Desktop\Github\CNN-with-NLP\ckpt_best_path\best.pt'
     main(train_file,test_file,config_file,ckpt_path,best_model_path)
