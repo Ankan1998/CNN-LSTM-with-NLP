@@ -56,7 +56,7 @@ def main(
         config['model']['model_dropout'],
         device
     )
-    optimizer = optim.Adam(model.parameters())
+    optimizer = optim.Adam(model.parameters(),eps=0.001)
     criterion = nn.CrossEntropyLoss()
     num_epochs = config['training']['n_epoch']
     clip = config['training']['clip']
@@ -68,8 +68,8 @@ def main(
         train_loss = train(model, train_itr, optimizer, criterion, clip)
         valid_loss = evaluate(model, val_itr, criterion)
 
-        if (epoch + 1) % 2 == 0:
-            print("training loss {}, validation_loss{}".format(train_loss,valid_loss))
+        # if (epoch + 1) % 2 == 0:
+        print("training loss {}, validation_loss{}".format(train_loss,valid_loss))
 
         if valid_loss < best_valid_loss:
             best_valid_loss = valid_loss
@@ -83,9 +83,9 @@ def main(
         save_checkpoint(checkpoint, is_best, checkpoint_path, best_model_path)
 
 if __name__=="__main__":
-    train_file = r'C:\Users\Ankan\Downloads\sub_train.csv'
-    test_file = r'C:\Users\Ankan\Downloads\sub_test.csv'
-    config_file = r'C:\Users\Ankan\Desktop\Github\CNN-with-NLP\config.json'
-    ckpt_path = r'C:\Users\Ankan\Desktop\Github\CNN-with-NLP\ckpt_best_path\latest.pt'
-    best_model_path = r'C:\Users\Ankan\Desktop\Github\CNN-with-NLP\ckpt_best_path\best.pt'
+    train_file = '/root/CNN-with-NLP/dataset/train_tweet.csv'
+    test_file = '/root/CNN-with-NLP/dataset/test_tweets.csv'
+    config_file = '/root/CNN-with-NLP/config.json'
+    ckpt_path = '/root/CNN-with-NLP/save_model/latest.pt'
+    best_model_path = '/root/CNN-with-NLP/save_model/best.pt'
     main(train_file,test_file,config_file,ckpt_path,best_model_path)
