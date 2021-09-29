@@ -9,20 +9,20 @@ def data_pipeline(train_file, test_file,max_vocab=1000,min_freq=2,batch_size=128
 
     # Build Vocab
     train_data = vocab_builder(trn_data,max_vocab,min_freq)
-    vocab_size = len(train_data.fields['text'].vocab)
+
     # Train and Val Split
     train_data, val_data = train_val_splitter(train_data)
 
     # Iterator
     train_itr, val_itr, test_itr = dataset_itr(train_data, val_data, test_data,batch_size,device)
 
-    return train_itr, val_itr, test_itr, vocab_size
+    return train_itr, val_itr, test_itr
 
 if __name__=="__main__":
 
     train_file = r'C:\Users\Ankan\Downloads\sub_train.csv'
     test_file = r'C:\Users\Ankan\Downloads\sub_test.csv'
-    train_itr, val_itr, test_itr,vocab_size = data_pipeline(train_file,test_file,2)
+    train_itr, val_itr, test_itr = data_pipeline(train_file,test_file,2)
     for batch in train_itr:
         print(batch.text)
         # print(batch.labels)
