@@ -55,8 +55,8 @@ def main(
         config['model']['model_dropout'],
         device
     )
-    optimizer = optim.Adam(model.parameters(),eps=0.001)
-    criterion = nn.CrossEntropyLoss()
+    optimizer = optim.Adam(model.parameters())
+    criterion = nn.BCEWithLogitsLoss()
     num_epochs = config['training']['n_epoch']
     clip = config['training']['clip']
     is_best = False
@@ -82,8 +82,8 @@ def main(
         save_checkpoint(checkpoint, is_best, checkpoint_path, best_model_path)
 
 if __name__=="__main__":
-    train_file = r'C:\Users\Ankan\Downloads\train_tweet.csv'
-    test_file = r'C:\Users\Ankan\Downloads\test_tweets.csv'
+    train_file = r'C:\Users\Ankan\Downloads\sub_train.csv'
+    test_file = r'C:\Users\Ankan\Downloads\sub_test.csv'
     config_file = r'C:\Users\Ankan\Desktop\Github\CNN-with-NLP\config.json'
     ckpt_path = r'C:\Users\Ankan\Desktop\Github\CNN-with-NLP\ckpt_best_path\latest.pt'
     best_model_path = r'C:\Users\Ankan\Desktop\Github\CNN-with-NLP\ckpt_best_path\best.pt'
