@@ -7,7 +7,7 @@ def train(model, iterator, optimizer, criterion, clip):
     for i, batch in enumerate(iterator):
         optimizer.zero_grad()
         output = model(batch.text)
-        loss = criterion(output, torch.unsqueeze(batch.labels, 1))
+        loss = criterion(output, torch.unsqueeze(batch.labels, 1).float())
         loss.backward()
         torch.nn.utils.clip_grad_norm_(model.parameters(), clip)
         optimizer.step()

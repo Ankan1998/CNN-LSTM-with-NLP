@@ -7,6 +7,6 @@ def evaluate(model, iterator, criterion):
     with torch.no_grad():
         for i, batch in enumerate(iterator):
             output = model(batch.text)
-            loss = criterion(output, torch.unsqueeze(batch.labels,1))
+            loss = criterion(output, torch.unsqueeze(batch.labels,1).float())
             epoch_loss += loss.item()
     return epoch_loss / len(iterator)
