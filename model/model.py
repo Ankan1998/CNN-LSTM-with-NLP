@@ -53,7 +53,7 @@ class CNNNLPModel(nn.Module):
         combo = torch.cat((conved,combined),2)
         _ , (hidden,cell) = self.rnn(combo)
         out = self.last_linear(hidden.permute(1,0,2))
-        print(out.shape)
+        out = torch.squeeze(out,1)
         return out
 
 if __name__=="__main__":
