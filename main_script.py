@@ -1,9 +1,9 @@
 import torch.cuda
 from dataset_processing.dataset_processing_pipeline import data_pipeline
 import torch.nn as nn
+from torch.optim import lr_scheduler
 import torch.optim as optim
 import json
-
 from model.model import CNNNLPModel
 from tqdm import tqdm
 
@@ -57,6 +57,7 @@ def main(
     )
     optimizer = optim.Adam(model.parameters())
     criterion = nn.BCEWithLogitsLoss()
+    scheduler = lr_scheduler.StepLR(optimizer,step_size=10,gamma=0.5)
     num_epochs = config['training']['n_epoch']
     clip = config['training']['clip']
     is_best = False
@@ -80,9 +81,10 @@ def main(
             'optimizer': optimizer.state_dict(),
         }
         save_checkpoint(checkpoint, is_best, checkpoint_path, best_model_path)
+        scheduler.step()
 
 if __name__=="__main__":
-    train_file = r'C:\Users\Ankan\Downloads\sub_train.csv'
+    train_file = r'C:\Users\Ankan\Downloads\sub_sub_train.csv'
     test_file = r'C:\Users\Ankan\Downloads\sub_test.csv'
     config_file = r'C:\Users\Ankan\Desktop\Github\CNN-with-NLP\config.json'
     ckpt_path = r'C:\Users\Ankan\Desktop\Github\CNN-with-NLP\ckpt_best_path\latest.pt'
