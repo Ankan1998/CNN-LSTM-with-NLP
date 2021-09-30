@@ -29,7 +29,8 @@ class CNNNLPModel(nn.Module):
                                     for _ in range(n_layers)])
 
         self.dropout = nn.Dropout(dropout)
-        self.last_linear = nn.Linear(2*emb_dim,1)
+        self.rnn = nn.LSTM(emb_dim*2,hid_dim,dropout=dropout,batch_first=True)
+        self.last_linear = nn.Linear(hid_dim,1)
 
     def forward(self, src):
         batch_size = src.shape[0]
@@ -49,10 +50,10 @@ class CNNNLPModel(nn.Module):
 
         conved = self.hid2emb(conved.permute(0, 2, 1))
         combined = (conved + embedded) * self.scale
-
-
         combo = torch.cat((conved,combined),2)
-        out = self.last_linear(combo)
+        _ , (hidden,cell) = self.rnn(combo)
+        out = self.last_linear(hidden.permute(1,0,2))
+        print(out.shape)
         return out
 
 if __name__=="__main__":
