@@ -2,11 +2,11 @@
 This repo is created to experiment with power of CNN on NLP tasks.
 
 ### TODO
-* [ ] Data Preparation
+* [x] Data Preparation
   * [x] Text Preprocessing
   * [x] Data pipeline
 * [x] Model Design
-  * [ ] Encoder Head
+  * [x] Encoder Head
   * [x] Classifier Head
 * [x] Training
 * [x] Saving & Loading
